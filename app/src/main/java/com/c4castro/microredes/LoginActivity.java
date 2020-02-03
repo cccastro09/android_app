@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                         saveUser(String.valueOf(s.getInt("id")), s.getString("name"), s.getString("jwt"));
                         Snackbar.make(mRoot, "Login exitoso", Snackbar.LENGTH_LONG)
                                 .show();
+
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(i);
@@ -130,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                 params.put("email", strings[0]);
                 params.put("password", strings[1]);
 
-                String json = NetworkUtils.sendPost(API_URL, params);
+                String json = NetworkUtils.sendPost(API_URL, params, null);
                 System.out.println(json);
                 if (json != null) {
                     JSONObject responseJson = new JSONObject(json);
@@ -139,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
                     return responseJson;
                 }
                 return null;
-            } catch (Exception e) {
+            } catch (Exception | NetworkUtils.UnAuthException e) {
                 e.printStackTrace();
             }
 
