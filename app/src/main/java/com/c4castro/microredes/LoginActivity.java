@@ -1,11 +1,19 @@
 package com.c4castro.microredes;
 
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -21,11 +29,15 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout mPassword;
     private Button mLoginbtn;
     private CoordinatorLayout mRoot;
+    private TextView mTextView;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mRoot = findViewById(R.id.root);
         mEmail = findViewById(R.id.email);
@@ -42,6 +54,44 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+        mTextView = findViewById(R.id.textView);
+        mProgressBar = findViewById(R.id.progressBar);
+        if (checkUser()) {
+            // user logged in
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(i);
+            finish();
+        } else {
+            mProgressBar.setVisibility(View.GONE);
+            mEmail.setVisibility(View.VISIBLE);
+            mPassword.setVisibility(View.VISIBLE);
+            mLoginbtn.setVisibility(View.VISIBLE);
+            mTextView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    boolean saveUser(String id, String name, String jwt) {
+        ContentValues values = new ContentValues();
+        values.put("id", id);
+        values.put("name", name);
+        values.put("jwt", jwt);
+        try {
+            getContentResolver().insert(Uri.parse("content://com.c4castro.microredes.data.provider.UserProvider/users"), values);
+            return true;
+        } catch (SQLiteException e) {
+            return false;
+        }
+    }
+
+    boolean checkUser() {
+        Cursor cursor = getContentResolver().query(Uri.parse("content://com.c4castro.microredes.data.provider.UserProvider/users"), null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            cursor.close();
+            return true;
+        }
+        return false;
+
     }
 
 
@@ -56,8 +106,13 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 try {
                     if (s.isNull("error")) {
+                        saveUser(String.valueOf(s.getInt("id")), s.getString("name"), s.getString("jwt"));
                         Snackbar.make(mRoot, "Login exitoso", Snackbar.LENGTH_LONG)
                                 .show();
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(i);
+                        finish();
                     } else {
                         Snackbar.make(mRoot, s.getJSONObject("error").getString("message"), Snackbar.LENGTH_LONG)
                                 .show();

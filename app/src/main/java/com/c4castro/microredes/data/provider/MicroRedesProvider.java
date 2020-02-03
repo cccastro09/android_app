@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 
 import java.util.HashMap;
 
-public class UserProvider extends ContentProvider {
+public class MicroRedesProvider extends ContentProvider {
 
     static final String PROVIDER_NAME = "com.c4castro.microredes.data.provider.UserProvider";
     static final String URL = "content://" + PROVIDER_NAME + "/users";
@@ -61,7 +61,7 @@ public class UserProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        qb.setTables(TABLE_NAME);
+        qb.setTables(TABLE_NAME2);
 
         switch (uriMatcher.match(uri)) {
             case uriCode:
@@ -81,7 +81,7 @@ public class UserProvider extends ContentProvider {
 
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
-        long rowID = db.insert(TABLE_NAME, "", values);
+        long rowID = db.insert(TABLE_NAME2, "", values);
         if (rowID > 0) {
             Uri _uri = ContentUris.withAppendedId(CONTENT_URI, rowID);
             getContext().getContentResolver().notifyChange(_uri, null);
@@ -96,7 +96,7 @@ public class UserProvider extends ContentProvider {
         int count = 0;
         switch (uriMatcher.match(uri)) {
             case uriCode:
-                count = db.update(TABLE_NAME, values, selection, selectionArgs);
+                count = db.update(TABLE_NAME2, values, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
@@ -110,7 +110,7 @@ public class UserProvider extends ContentProvider {
         int count;
         switch (uriMatcher.match(uri)) {
             case uriCode:
-                count = db.delete(TABLE_NAME, selection, selectionArgs);
+                count = db.delete(TABLE_NAME2, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
@@ -121,13 +121,19 @@ public class UserProvider extends ContentProvider {
 
     private SQLiteDatabase db;
     static final String DATABASE_NAME = "RedesDb";
-    static final String TABLE_NAME = "Users";
+    static final String TABLE_NAME2 = "Redes";
     static final int DATABASE_VERSION = 1;
-    static final String CREATE_DB_TABLE = " CREATE TABLE " + TABLE_NAME
+    static final String CREATE_DB_TABLE2 = " CREATE TABLE " + TABLE_NAME2
             + " (id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + " name TEXT NOT NULL, "
-            + " jwt TEXT NOT NULL);";
-
+            + " color                     TEXT NOT NULL, "
+            + " foto                      TEXT NOT NULL, "
+            + " familia                   TEXT NOT NULL, "
+            + " n_de_paredes_de_la_espora TEXT NOT NULL, "
+            + " pais                      TEXT NOT NULL, "
+            + " tamanio_um                TEXT NOT NULL, "
+            + " textura_de_la_espora      TEXT NOT NULL, "
+            + " tombre_cientifico         TEXT NOT NULL, "
+            + " informacion_de_la_especie TEXT NOT NULL);";
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseHelper(Context context) {
@@ -136,12 +142,12 @@ public class UserProvider extends ContentProvider {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL(CREATE_DB_TABLE);
+            db.execSQL(CREATE_DB_TABLE2);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME2);
             onCreate(db);
         }
     }
