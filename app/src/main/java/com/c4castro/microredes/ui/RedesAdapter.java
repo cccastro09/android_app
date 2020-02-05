@@ -40,9 +40,9 @@ public class RedesAdapter extends RecyclerView.Adapter<RedesAdapter.ViewHolder> 
         RedModel red = redes.get(position);
         holder.mName.setText(red.getTombreCientifico());
         holder.mDescription.setText(red.getInformacionDeLaEspecie());
-//        byte[] decodedString = Base64.decode(red.getFoto().substring(21), Base64.DEFAULT);
-//        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-//        holder.mPhoto.setImageBitmap(decodedByte);
+        byte[] decodedString = Base64.decode(red.getFoto().substring(21), Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        holder.mPhoto.setImageBitmap(decodedByte);
     }
 
     @Override

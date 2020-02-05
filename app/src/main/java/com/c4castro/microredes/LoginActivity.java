@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private CoordinatorLayout mRoot;
     private TextView mTextView;
     private ProgressBar mProgressBar;
+    private Button mRegisterbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
         mLoginbtn = findViewById(R.id.loginbtn);
+        mTextView = findViewById(R.id.textView);
+        mProgressBar = findViewById(R.id.progressBar);
+        mRegisterbtn = findViewById(R.id.registerbtn);
 
         mLoginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,12 +54,15 @@ public class LoginActivity extends AppCompatActivity {
                 mLoginbtn.setEnabled(false);
                 LoginTask loginTask = new LoginTask();
                 loginTask.execute(mEmail.getEditText().getText().toString(), mPassword.getEditText().getText().toString());
-
-
             }
         });
-        mTextView = findViewById(R.id.textView);
-        mProgressBar = findViewById(R.id.progressBar);
+        mRegisterbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(i);
+            }
+        });
         if (checkUser()) {
             // user logged in
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
@@ -68,13 +75,13 @@ public class LoginActivity extends AppCompatActivity {
             mPassword.setVisibility(View.VISIBLE);
             mLoginbtn.setVisibility(View.VISIBLE);
             mTextView.setVisibility(View.VISIBLE);
+            mRegisterbtn.setVisibility(View.VISIBLE);
         }
     }
 
-    boolean saveUser(String id, String name, String jwt) {
+    boolean saveUser(String id, String jwt) {
         ContentValues values = new ContentValues();
         values.put("id", id);
-        values.put("name", name);
         values.put("jwt", jwt);
         try {
             getContentResolver().insert(Uri.parse("content://com.c4castro.microredes.data.provider.UserProvider/users"), values);
@@ -106,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 try {
                     if (s.isNull("error")) {
-                        saveUser(String.valueOf(s.getInt("id")), s.getString("name"), s.getString("jwt"));
+                        saveUser(String.valueOf(s.getInt("id")), s.getString("jwt"));
                         Snackbar.make(mRoot, "Login exitoso", Snackbar.LENGTH_LONG)
                                 .show();
 

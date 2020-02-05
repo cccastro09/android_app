@@ -54,6 +54,11 @@ public class NotificationsFragment extends Fragment {
         if (cursor != null && cursor.moveToFirst()) {
             new LoadDataTask().execute(cursor.getString(cursor.getColumnIndex("jwt")));
             cursor.close();
+        }else {
+            Intent i = new Intent(getContext(), LoginActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(i);
+            getActivity().finish();
         }
     }
 
@@ -77,7 +82,7 @@ public class NotificationsFragment extends Fragment {
                             JSONObject item = data.getJSONObject(i);
                             redes.add(new RedModel(item.getLong("id"),
                                     item.getString("color"),
-                                    "",
+                                    item.getString("foto"),
                                     item.getString("familia"),
                                     item.getString("n_de_paredes_de_la_espora"),
                                     item.getString("pais"),

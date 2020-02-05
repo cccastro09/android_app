@@ -122,10 +122,9 @@ public class UserProvider extends ContentProvider {
     private SQLiteDatabase db;
     static final String DATABASE_NAME = "RedesDb";
     static final String TABLE_NAME = "Users";
-    static final int DATABASE_VERSION = 1;
+    static final int DATABASE_VERSION = 2;
     static final String CREATE_DB_TABLE = " CREATE TABLE " + TABLE_NAME
             + " (id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + " name TEXT NOT NULL, "
             + " jwt TEXT NOT NULL);";
 
 
