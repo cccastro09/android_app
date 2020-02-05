@@ -15,6 +15,10 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:parentActivityName=".LoginActivity">
@@ -22,7 +26,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.c4castro.microredes.LoginActivity" />
         </activity>
-        <activity android:name=".LoginActivity" android:label="@string/title_activity_login">
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,12 +37,12 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name" />
+
         <provider
-            android:authorities="com.c4castro.microredes.data.provider.UserProvider"
             android:name=".data.provider.UserProvider"
-            android:exported="false">
-        </provider>
+            android:authorities="com.c4castro.microredes.data.provider.UserProvider"
+            android:exported="false"></provider>
     </application>
 
 </manifest>

@@ -8,17 +8,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.c4castro.microredes.LoginActivity;
 import com.c4castro.microredes.NetworkUtils;
+import com.c4castro.microredes.ProfileActivity;
 import com.c4castro.microredes.R;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -28,10 +27,21 @@ import org.json.JSONObject;
 public class HomeFragment extends Fragment {
 
     private static final String API_URL = "https://android-prueba42.herokuapp.com/api/me";
+    private Button mGotoProfile;
+    private Button mGotoComparator;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+        mGotoProfile = root.findViewById(R.id.gotoProfile);
+        mGotoComparator = root.findViewById(R.id.gotoComparator);
+        mGotoProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), ProfileActivity.class);
+                startActivity(i);
+            }
+        });
         return root;
     }
 
@@ -48,6 +58,7 @@ public class HomeFragment extends Fragment {
             startActivity(i);
             getActivity().finish();
         }
+
     }
 
 
