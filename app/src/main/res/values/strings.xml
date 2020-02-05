@@ -9,4 +9,5 @@
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_login">Micro Redes</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_photo">PhotoActivity</string>
 </resources>

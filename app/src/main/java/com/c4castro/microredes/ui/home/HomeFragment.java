@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.c4castro.microredes.LoginActivity;
 import com.c4castro.microredes.NetworkUtils;
+import com.c4castro.microredes.PhotoActivity;
 import com.c4castro.microredes.ProfileActivity;
 import com.c4castro.microredes.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,6 +40,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), ProfileActivity.class);
+                startActivity(i);
+            }
+        });
+        mGotoComparator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), PhotoActivity.class);
                 startActivity(i);
             }
         });
