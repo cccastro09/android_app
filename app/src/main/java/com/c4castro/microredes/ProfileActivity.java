@@ -95,10 +95,15 @@ public class ProfileActivity extends AppCompatActivity {
                                 Cursor cursor =
                                         getContentResolver().query(Uri.parse("content://com.c4castro.microredes.data.provider.UserProvider/users"), null, null, null, null);
                                 if (cursor != null && cursor.moveToFirst()) {
-                                    if (mNewPassword.getEditText().getText().toString().equals(mRepeatNewPassword.getEditText().getText().toString())) {
+                                    String newPassword = mNewPassword.getEditText().getText().toString();
+                                    String repeatPassword = mRepeatNewPassword.getEditText().getText().toString();
+
+                                    // Aqui valida
+                                    if (newPassword.equals(repeatPassword)) {
                                         mChangePasswordBtn.setEnabled(false);
-                                        new UpdatePasswordTask().execute(cursor.getString(cursor.getColumnIndex("jwt")), mNewPassword.getEditText().getText().toString());
+                                        new UpdatePasswordTask().execute(cursor.getString(cursor.getColumnIndex("jwt")), newPassword);
                                     } else {
+                                        // Con esto muestro mensaje
                                         Snackbar.make(mRoot, "Las contraseñas no coinciden.", Snackbar.LENGTH_LONG)
                                                 .show();
                                     }

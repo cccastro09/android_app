@@ -44,13 +44,19 @@ public class SignUpActivity extends AppCompatActivity {
         mLoginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mPassword.getEditText().getText().toString().equals(mPassword2.getEditText().getText().toString()) &&
-                        !mEmail.getEditText().getText().toString().isEmpty() &&
-                        !mName.getEditText().getText().toString().isEmpty()
+                String password = mPassword.getEditText().getText().toString();
+                String repeatPassword = mPassword2.getEditText().getText().toString();
+                String email = mEmail.getEditText().getText().toString();
+                String name = mName.getEditText().getText().toString();
+                if (password.equals(repeatPassword) &&
+                        !email.isEmpty() &&
+                        !name.isEmpty()
                 ) {
-                    new SignUpTask().execute(mName.getEditText().getText().toString(),mEmail.getEditText().getText().toString(),mPassword.getEditText().getText().toString());
-                }else{
-                    Snackbar.make(mRoot, "Completa todos los campos", Snackbar.LENGTH_LONG)
+                    // Valido que no hayan campos vacíos y que las contraseñas coincidan
+                    new SignUpTask().execute(name, email, password);
+                } else {
+                    // Muestro mensaje
+                    Snackbar.make(mRoot, "Completa todos los campos y las contraseñas deben coincidir.", Snackbar.LENGTH_LONG)
                             .show();
                 }
             }
