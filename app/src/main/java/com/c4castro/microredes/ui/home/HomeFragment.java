@@ -28,14 +28,12 @@ import org.json.JSONObject;
 public class HomeFragment extends Fragment {
 
     private static final String API_URL = "https://android-prueba42.herokuapp.com/api/me";
-    private Button mGotoProfile;
-    private Button mGotoComparator;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        mGotoProfile = root.findViewById(R.id.gotoProfile);
-        mGotoComparator = root.findViewById(R.id.gotoComparator);
+        Button mGotoProfile = root.findViewById(R.id.gotoProfile);
+        Button mGotoComparator = root.findViewById(R.id.gotoComparator);
         mGotoProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

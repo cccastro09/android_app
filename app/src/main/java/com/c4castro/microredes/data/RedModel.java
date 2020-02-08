@@ -13,7 +13,18 @@ public class RedModel {
     private String tombreCientifico;
     private String informacionDeLaEspecie;
 
-    public RedModel(long id, String color, String foto, String familia, String nDeParedesDeLaEspora, String pais, String tamanioUm, String texturaDeLaEspora, String tombreCientifico, String informacionDeLaEspecie) {
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    private double lat;
+    private double lng;
+
+    public RedModel(long id, String color, String foto, String familia, String nDeParedesDeLaEspora, String pais, String tamanioUm, String texturaDeLaEspora, String tombreCientifico, String informacionDeLaEspecie, double lat, double lng) {
         this.id = id;
         this.color = color;
         this.foto = foto;
@@ -24,6 +35,8 @@ public class RedModel {
         this.texturaDeLaEspora = texturaDeLaEspora;
         this.tombreCientifico = tombreCientifico;
         this.informacionDeLaEspecie = informacionDeLaEspecie;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public long getId() {
