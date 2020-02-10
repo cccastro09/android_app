@@ -5,26 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@mipmap/ic_launcher" />
-
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="176dp"
+        android:layout_height="51dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="32dp"
-        android:text="TEXTO DESCRIPCION"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="HMA APP"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="324dp"
+        android:layout_height="284dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="La agricultura es uno de los motores económicos de Ecuador en donde día a día se cultivan miles de hectáreas de diversos tipos de alimentos, pero existe un problema con el uso indiscriminado de agroquímicos tóxicos y contaminantes para la producción masiva de cultivos.   \n\ \n\Los Hongos Micorrízicos Arbusculares (HMA) son organismos del suelo que viven simbióticamente con la mayoría de plantas. [7:37, 9/2/2020] Castro: el uso de HMA tiene un gran potencial biotecnológico debido a que facilitan la disponibilidad de nutrientes para las plantas. Por lo tanto, plantas micorrizadas poseen una ventaja importante con respecto a las no micorrizadas” (Klironomos 2003)."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

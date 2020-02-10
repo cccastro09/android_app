@@ -5,11 +5,10 @@
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="Inicio" />
-
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="Redes" />
+        android:title="HMA" />
 
     <item
         android:id="@+id/navigation_dashboard"
