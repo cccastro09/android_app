@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (navController.getCurrentDestination().getId() == R.id.navigation_notifications) {
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
 
     }
-
+*/
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
